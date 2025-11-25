@@ -216,7 +216,7 @@ function runBattle() {
             clearInterval(battle);
             addBattleLog('Victory!');
             
-            const healAmount = Math.floor(gameState.player.currentMaxHp * 0.2);
+            const healAmount = Math.floor(gameState.player.currentMaxHp * 0.4);
             const oldHp = gameState.player.hp;
             gameState.player.hp = Math.min(gameState.player.hp + healAmount, gameState.player.currentMaxHp);
             addBattleLog(`✨ You heal ${gameState.player.hp - oldHp} HP after victory!`);

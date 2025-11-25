@@ -3,9 +3,7 @@
 A browser-based auto-battle game where you choose a class, fight enemies, and unlock powerful skills.
 This is very similar and a 
 
-## 🎮 Play Now
-
-**[Click To Play](https://chew-lo.github.io/RogueLike-RPG/)**
+## [🎮 Play Now](https://chew-lo.github.io/RogueLike-RPG/)
 
 ## 🎯 How to Play
 

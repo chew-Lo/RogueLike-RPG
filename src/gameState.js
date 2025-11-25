@@ -13,9 +13,9 @@ const classData = {
     warrior: { 
         name: 'Warrior', 
         icon: '🛡️', 
-        strength: 15, 
-        dodge: 5, 
-        maxHp: 150, 
+        strength: 13, 
+        dodge: 4, 
+        maxHp: 130, 
         startingSkill: 'Shield' 
     },
     archer: { 
@@ -23,15 +23,15 @@ const classData = {
         icon: '🏹', 
         strength: 10, 
         dodge: 15, 
-        maxHp: 120, 
+        maxHp: 100, 
         startingSkill: 'Critical Strike' 
     },
     wizard: { 
         name: 'Wizard', 
         icon: '🧙', 
-        strength: 5, 
-        dodge: 5, 
-        maxHp: 100, 
+        strength: 12, 
+        dodge: 8, 
+        maxHp: 115, 
         startingSkill: 'Fireball' 
     }
 };

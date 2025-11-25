@@ -1,0 +1,116 @@
+<!--    Kyle Lofredo   -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RL-RPG</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>⚔️ RL-RPG ⚔️</h1>
+        
+        <div id="classScreen" class="game-screen active">
+            <h2 class="center">Choose Your Class</h2>
+            <div class="class-selection">
+                <div class="class-card" onclick="selectClass('warrior')">
+                    <div class="fighter-icon">🛡️</div>
+                    <h2>Warrior</h2>
+                    <p>Master of strength and endurance</p>
+                    <div class="class-stats">
+                        <p>💪 Strength: 13</p>
+                        <p>⚡ Dodge: 4</p>
+                        <p>❤️ HP: 130</p>
+                        <p><strong>Starting Skill: Shield</strong></p>
+                        <p><em>Block next enemy attack</em></p>
+                    </div>
+                </div>
+                <div class="class-card" onclick="selectClass('archer')">
+                    <div class="fighter-icon">🏹</div>
+                    <h2>Archer</h2>
+                    <p>Swift and precise striker</p>
+                    <div class="class-stats">
+                        <p>💪 Strength: 10</p>
+                        <p>⚡ Dodge: 15</p>
+                        <p>❤️ HP: 100</p>
+                        <p><strong>Starting Skill: Critical Strike</strong></p>
+                        <p><em>Double damage on next attack</em></p>
+                    </div>
+                </div>
+                <div class="class-card" onclick="selectClass('wizard')">
+                    <div class="fighter-icon">🧙</div>
+                    <h2>Wizard</h2>
+                    <p>Wielder of arcane powers</p>
+                    <div class="class-stats">
+                        <p>💪 Strength: 12</p>
+                        <p>⚡ Dodge: 8</p>
+                        <p>❤️ HP: 115</p>
+                        <p><strong>Starting Skill: Fireball</strong></p>
+                        <p><em>+15 damage on attack</em></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div id="battleScreen" class="game-screen">
+            <div class="battle-area">
+                <h2 class="center">Wave <span id="waveNum">1</span></h2>
+                <div class="stats-display">
+                    <div class="stat-box"><h3>💪 Strength</h3><p id="playerStr">0</p></div>
+                    <div class="stat-box"><h3>⚡ Dodge</h3><p id="playerDodge">0</p></div>
+                    <div class="stat-box"><h3>🏆 Score</h3><p id="score">0</p></div>
+                </div>
+                <div id="skillsDisplay" class="skills-display" style="display: none;">
+                    <h3>🔮 Unlocked Skills</h3>
+                    <div id="skillsList"></div>
+                </div>
+                <div class="fighters">
+                    <div class="fighter">
+                        <div class="fighter-icon" id="playerIcon">🛡️</div>
+                        <h3 id="playerName">Player</h3>
+                        <div class="health-bar"><div class="health-fill" id="playerHealth">100/100</div></div>
+                    </div>
+                    <div style="font-size: 3em;">⚔️</div>
+                    <div class="fighter">
+                        <div class="fighter-icon" id="enemyIcon">👹</div>
+                        <h3 id="enemyName">Enemy</h3>
+                        <div class="health-bar"><div class="health-fill" id="enemyHealth">100/100</div></div>
+                    </div>
+                </div>
+                <div class="battle-log" id="battleLog"></div>
+                <div class="center">
+                    <button id="battleBtn" onclick="startBattle()">Start Battle</button>
+                </div>
+            </div>
+        </div>
+        
+        <div id="choiceScreen" class="game-screen">
+            <div class="battle-area">
+                <h2 class="center">Victory! Choose Your Reward</h2>
+                <div class="choice-area" id="choiceArea"></div>
+            </div>
+        </div>
+        
+        <div id="gameOverScreen" class="game-screen">
+            <div class="battle-area center">
+                <h2 style="color: red; font-size: 3em;">💀 Game Over 💀</h2>
+                <h3>Final Score: <span id="finalScore">0</span></h3>
+                <h3>Waves Survived: <span id="finalWave">0</span></h3>
+                <button onclick="location.reload()">Play Again</button>
+            </div>
+        </div>
+        
+        <div class="leaderboard">
+            <h2>🏆 Leaderboard 🏆</h2>
+            <div id="leaderboardList"></div>
+        </div>
+    </div>
+
+    <script src="src/gameState.js"></script>
+    <script src="src/UI.js"></script>
+    <script src="src/battleSystem.js"></script>
+    <script src="src/rewardSystem.js"></script>
+</body>
+</html>

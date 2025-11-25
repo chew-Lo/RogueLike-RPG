@@ -2,6 +2,10 @@
 
 A browser-based auto-battle game where you choose a class, fight enemies, and unlock powerful skills.
 
+## 🎮 Play Now
+
+**[Click To Play](https://chew-lo.github.io/RogueLike-RPG/)**
+
 ## 🎯 How to Play
 
 1. **Choose Your Class** - Warrior, Archer, or Wizard

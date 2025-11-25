@@ -22,7 +22,7 @@ const classData = {
         name: 'Archer', 
         icon: '🏹', 
         strength: 10, 
-        dodge: 25, 
+        dodge: 30, 
         maxHp: 100, 
         startingSkill: 'Critical Strike' 
     },
@@ -30,7 +30,7 @@ const classData = {
         name: 'Wizard', 
         icon: '🧙', 
         strength: 12, 
-        dodge: 15, 
+        dodge: 20, 
         maxHp: 115, 
         startingSkill: 'Fireball' 
     }

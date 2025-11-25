@@ -181,7 +181,7 @@ function runBattle() {
         
         const playerActivatedSkill = activatePlayerSkill();
         
-        if (Math.random() * 100 < gameState.enemy.dodge) {
+        if (Math.random() * 100 < gameState.enemy.dodge + 10) {
             addBattleLog(`${gameState.enemy.name} dodged the attack!`);
         } else {
             let playerDamage = gameState.player.strength;
@@ -195,7 +195,7 @@ function runBattle() {
             }
             
             if (playerActivatedSkill?.type === 'lifesteal') {
-                const lifestealAmount = Math.floor(playerDamage * playerActivatedSkill.value);
+                const lifestealAmount = Math.floor(playerDamage * playerActivatedSkill.value) + 5;
                 const oldHp = gameState.player.hp;
                 gameState.player.hp = Math.min(gameState.player.hp + lifestealAmount, gameState.player.currentMaxHp);
                 addBattleLog(`🩸 You lifesteal ${lifestealAmount} HP!`);
@@ -216,7 +216,7 @@ function runBattle() {
             clearInterval(battle);
             addBattleLog('Victory!');
             
-            const healAmount = Math.floor(gameState.player.currentMaxHp * 0.4);
+            const healAmount = Math.floor(gameState.player.currentMaxHp * 0.35);
             const oldHp = gameState.player.hp;
             gameState.player.hp = Math.min(gameState.player.hp + healAmount, gameState.player.currentMaxHp);
             addBattleLog(`✨ You heal ${gameState.player.hp - oldHp} HP after victory!`);

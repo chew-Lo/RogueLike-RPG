@@ -1,6 +1,7 @@
 # Roguelike RPG
 
 A browser-based auto-battle game where you choose a class, fight enemies, and unlock powerful skills.
+This is very similar and a 
 
 ## 🎮 Play Now
 
@@ -21,6 +22,10 @@ A browser-based auto-battle game where you choose a class, fight enemies, and un
 - Enemy skills that make battles challenging
 - Automatic healing after victories
 - Top 3 leaderboard to track best scores
+
+## 🔄 Code Reuse
+
+The battle system in this game was adapted from my Godot project **ZeroToHero**. The original GDscript combat logic was translated to JavaScript and enhanced with new features for this web version.
 
 ## 🛠️ Built With
 

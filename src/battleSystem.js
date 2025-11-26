@@ -181,7 +181,7 @@ function runBattle() {
         
         const playerActivatedSkill = activatePlayerSkill();
         
-        if (Math.random() * 100 < gameState.enemy.dodge + 5) {
+        if (Math.random() * 100 < gameState.enemy.dodge + 2) {
             addBattleLog(`${gameState.enemy.name} dodged the attack!`);
         } else {
             let playerDamage = gameState.player.strength;

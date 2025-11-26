@@ -1,4 +1,4 @@
-// this shows all the progression ssytem of the game
+// this shows all the progression system of the game
 function showChoices() {
     const choiceArea = document.getElementById('choiceArea');
     choiceArea.innerHTML = '';
@@ -16,12 +16,12 @@ function showChoices() {
 
 function generateChoices() {
     const choices = [];
-    const stats = ['strength', 'dodge'];
+    const stats = ['strength', 'speed']; // Changed from 'dodge' to 'speed'
     
     for (let i = 0; i < 2; i++) {
         const stat = stats[Math.floor(Math.random() * stats.length)];
         const value = Math.floor(2 + Math.random() * 4);
-        let emoji = stat === 'strength' ? '💪' : '⚡';
+        let emoji = stat === 'strength' ? '💪' : '🏃';
         
         choices.push({ 
             type: 'stat', 

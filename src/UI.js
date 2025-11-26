@@ -5,7 +5,7 @@ function showScreen(screenId) {
 
 function updatePlayerStats() {
     document.getElementById('playerStr').textContent = gameState.player.strength;
-    document.getElementById('playerDodge').textContent = gameState.player.dodge;
+    document.getElementById('playerDodge').textContent = gameState.player.speed;
     document.getElementById('waveNum').textContent = gameState.wave;
     document.getElementById('score').textContent = gameState.score;
     updateHealthBar('player', gameState.player.hp, gameState.player.currentMaxHp);

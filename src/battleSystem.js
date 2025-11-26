@@ -1,5 +1,6 @@
 // This part of the code is very similar to the GD script I made from my past project 
 // It is a translated version of the GD script code from my game ZeroToHero
+
 function selectClass(className) {
     gameState.className = className;
     gameState.player = { 
@@ -35,15 +36,13 @@ function generateEnemy() {
         icon: type.icon,
         hp: 80 + (gameState.wave * 10), 
         strength: 8 + Math.floor(gameState.wave * 1.5), 
-        dodge: 3 + Math.floor(gameState.wave * 0.8),
+        speed: 3 + Math.floor(gameState.wave * 0.8),
         skills: enemySkills.slice(0, skillsToHave),
-        poisonStacks: 0,
         currentSkill: null
     };
     
     gameState.enemy.maxHp = gameState.enemy.hp;
     gameState.battleRound = 0;
-    gameState.player.poisonStacks = 0;
     gameState.player.berserkRounds = 0;
     
     document.getElementById('enemyIcon').textContent = type.icon;
@@ -63,8 +62,14 @@ function startBattle() {
     setTimeout(() => runBattle(), 1000);
 }
 
+function getPlayerSkillProcChance() {
+    return gameState.className === 'wizard' ? 0.5 : 0.4;
+}
+
 function activatePlayerSkill() {
-    if (Math.random() < 0.2 && gameState.skills.length > 0) {
+    const skillChance = getPlayerSkillProcChance();
+    
+    if (Math.random() < skillChance && gameState.skills.length > 0) {
         const randomSkill = gameState.skills[Math.floor(Math.random() * gameState.skills.length)];
         
         switch(randomSkill.type) {
@@ -88,11 +93,6 @@ function activatePlayerSkill() {
                 addBattleLog(`🛡️ ${randomSkill.name} activates! Next attack will be blocked.`);
                 return { type: 'shield' };
                 
-            case 'poison':
-                gameState.enemy.poisonStacks = 3;
-                addBattleLog(`☠️ ${randomSkill.name} activates! Enemy poisoned for 3 rounds.`);
-                return { type: 'poison' };
-                
             case 'lifesteal':
                 addBattleLog(`🩸 ${randomSkill.name} activates! You will lifesteal this round.`);
                 return { type: 'lifesteal', value: randomSkill.value };
@@ -101,14 +101,14 @@ function activatePlayerSkill() {
                 addBattleLog(`💎 ${randomSkill.name} activates! Damage reduced by ${randomSkill.value}.`);
                 return { type: 'defense', value: randomSkill.value };
                 
-            case 'dodge':
-                gameState.player.dodge += randomSkill.value;
-                addBattleLog(`💨 ${randomSkill.name} activates! +${randomSkill.value} dodge chance.`);
+            case 'speed':
+                gameState.player.speed += randomSkill.value;
+                addBattleLog(`💨 ${randomSkill.name} activates! +${randomSkill.value} speed.`);
                 setTimeout(() => {
-                    gameState.player.dodge -= randomSkill.value;
+                    gameState.player.speed -= randomSkill.value;
                     addBattleLog(`💨 ${randomSkill.name} wears off.`);
                 }, 3000);
-                return { type: 'dodge' };
+                return { type: 'speed' };
                 
             case 'berserk':
                 gameState.player.strength += randomSkill.value;
@@ -119,13 +119,17 @@ function activatePlayerSkill() {
             case 'reflect':
                 addBattleLog(`✨ ${randomSkill.name} activates! You will reflect damage.`);
                 return { type: 'reflect', value: randomSkill.value };
+                
+            case 'stun':
+                addBattleLog(`🌀 ${randomSkill.name} activates! Enemy is stunned and will miss next attack.`);
+                return { type: 'stun' };
         }
     }
     return null;
 }
 
 function activateEnemySkill() {
-    if (Math.random() < 0.3 && gameState.enemy.skills.length > 0) {
+    if (Math.random() < 0.38 && gameState.enemy.skills.length > 0) {
         const randomSkill = gameState.enemy.skills[Math.floor(Math.random() * gameState.enemy.skills.length)];
         
         switch(randomSkill.type) {
@@ -145,15 +149,14 @@ function activateEnemySkill() {
                 addBattleLog(`⚡ ${gameState.enemy.name} uses ${randomSkill.name}! +${randomSkill.value} strength.`);
                 return { type: 'buff', value: randomSkill.value };
                 
-            case 'poison':
-                gameState.player.poisonStacks = 3;
-                addBattleLog(`⚡ ${gameState.enemy.name} uses ${randomSkill.name}! You are poisoned for 3 rounds.`);
-                return { type: 'poison' };
+            case 'speed':
+                gameState.enemy.speed += randomSkill.value;
+                addBattleLog(`⚡ ${gameState.enemy.name} uses ${randomSkill.name}! +${randomSkill.value} speed.`);
+                return { type: 'speed' };
                 
-            case 'dodge':
-                gameState.enemy.dodge += randomSkill.value;
-                addBattleLog(`⚡ ${gameState.enemy.name} uses ${randomSkill.name}! +${randomSkill.value} dodge chance.`);
-                return { type: 'dodge' };
+            case 'stun':
+                addBattleLog(`⚡ ${gameState.enemy.name} uses ${randomSkill.name}! You are stunned and will miss next attack.`);
+                return { type: 'stun' };
         }
     }
     return null;
@@ -163,27 +166,17 @@ function runBattle() {
     const battle = setInterval(() => {
         gameState.battleRound++;
         
-        if (gameState.enemy.poisonStacks > 0) {
-            const poisonDamage = 5;
-            gameState.enemy.hp -= poisonDamage;
-            gameState.enemy.poisonStacks--;
-            addBattleLog(`☠️ Enemy takes ${poisonDamage} poison damage! (${gameState.enemy.poisonStacks} rounds left)`);
-            updateHealthBar('enemy', gameState.enemy.hp, gameState.enemy.maxHp);
-        }
-        
-        if (gameState.player.poisonStacks > 0) {
-            const poisonDamage = 3;
-            gameState.player.hp -= poisonDamage;
-            gameState.player.poisonStacks--;
-            addBattleLog(`☠️ You take ${poisonDamage} poison damage! (${gameState.player.poisonStacks} rounds left)`);
-            updateHealthBar('player', gameState.player.hp, gameState.player.currentMaxHp);
-        }
-        
         const playerActivatedSkill = activatePlayerSkill();
         
-        if (Math.random() * 100 < gameState.enemy.dodge + 2) {
-            addBattleLog(`${gameState.enemy.name} dodged the attack!`);
-        } else {
+        let playerCanAttack = true;
+        if (playerActivatedSkill?.type === 'stun') {
+            addBattleLog(`🌀 ${gameState.enemy.name} is stunned and cannot attack this round!`);
+            playerCanAttack = false;
+        }
+        
+        if (playerCanAttack && Math.random() * 100 < gameState.enemy.speed + 2) {
+            addBattleLog(`${gameState.enemy.name} dodged the attack with speed!`);
+        } else if (playerCanAttack) {
             let playerDamage = gameState.player.strength;
             
             if (playerActivatedSkill) {
@@ -236,6 +229,12 @@ function runBattle() {
                 gameState.enemy.currentSkill = null;
             }
             
+            let enemyCanAttack = true;
+            if (enemyActivatedSkill?.type === 'stun') {
+                addBattleLog(`🌀 You are stunned and cannot attack this round!`);
+                enemyCanAttack = false;
+            }
+            
             let enemyDamage = gameState.enemy.strength;
             
             if (gameState.enemy.currentSkill) {
@@ -244,8 +243,10 @@ function runBattle() {
                 }
             }
             
-            if (Math.random() * 100 < gameState.player.dodge) {
-                addBattleLog(`You dodged ${gameState.enemy.name}'s attack!`);
+            if (!enemyCanAttack) {
+                addBattleLog(`${gameState.enemy.name} misses their attack due to stun!`);
+            } else if (Math.random() * 100 < gameState.player.speed) {
+                addBattleLog(`You dodged ${gameState.enemy.name}'s attack with your speed!`);
             } else {
                 let finalDamage = enemyDamage;
                 

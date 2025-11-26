@@ -22,15 +22,15 @@ const classData = {
         name: 'Archer', 
         icon: '🧝🏼🏹', 
         strength: 10, 
-        speed: 40, 
+        speed: 35, 
         maxHp: 120, 
         startingSkill: 'Critical Strike' 
     },
     wizard: { 
-        name: 'Wizard', 
+        name: 'Mage', 
         icon: '🧙🔥', 
         strength: 10, 
-        speed: 20, 
+        speed: 15, 
         maxHp: 100, 
         startingSkill: 'Fireball' 
     }

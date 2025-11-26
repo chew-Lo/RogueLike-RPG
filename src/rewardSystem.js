@@ -16,7 +16,7 @@ function showChoices() {
 
 function generateChoices() {
     const choices = [];
-    const stats = ['strength', 'speed']; // Changed from 'dodge' to 'speed'
+    const stats = ['strength', 'speed']; 
     
     for (let i = 0; i < 2; i++) {
         const stat = stats[Math.floor(Math.random() * stats.length)];

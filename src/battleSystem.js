@@ -63,7 +63,7 @@ function startBattle() {
 }
 
 function getPlayerSkillProcChance() {
-    return gameState.className === 'wizard' ? 0.48 : 0.38;
+    return gameState.className === 'wizard' ? 0.53 : 0.43;
 }
 
 function activatePlayerSkill() {
@@ -209,7 +209,7 @@ function runBattle() {
             clearInterval(battle);
             addBattleLog('Victory!');
             
-            const healAmount = Math.floor(gameState.player.currentMaxHp * 0.25);
+            const healAmount = Math.floor(gameState.player.currentMaxHp * 0.35);
             const oldHp = gameState.player.hp;
             gameState.player.hp = Math.min(gameState.player.hp + healAmount, gameState.player.currentMaxHp);
             addBattleLog(`✨ You heal ${gameState.player.hp - oldHp} HP after victory!`);

@@ -125,7 +125,7 @@ function activatePlayerSkill() {
 }
 
 function activateEnemySkill() {
-    if (Math.random() < 0.2 && gameState.enemy.skills.length > 0) {
+    if (Math.random() < 0.3 && gameState.enemy.skills.length > 0) {
         const randomSkill = gameState.enemy.skills[Math.floor(Math.random() * gameState.enemy.skills.length)];
         
         switch(randomSkill.type) {
@@ -195,7 +195,7 @@ function runBattle() {
             }
             
             if (playerActivatedSkill?.type === 'lifesteal') {
-                const lifestealAmount = Math.floor(playerDamage * playerActivatedSkill.value) + 5;
+                const lifestealAmount = Math.floor(playerDamage * playerActivatedSkill.value);
                 const oldHp = gameState.player.hp;
                 gameState.player.hp = Math.min(gameState.player.hp + lifestealAmount, gameState.player.currentMaxHp);
                 addBattleLog(`🩸 You lifesteal ${lifestealAmount} HP!`);

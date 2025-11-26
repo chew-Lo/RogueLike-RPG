@@ -44,7 +44,7 @@ const allSkills = [
     { name: 'Critical Strike', description: 'Double damage next attack', type: 'critical', value: 2 },
     { name: 'Meteor', description: '+30 damage on attack', type: 'damage', value: 30 },
     { name: 'Poison Dart', description: 'Deals 5 damage over 3 rounds', type: 'poison', value: 5 },
-    { name: 'Vampire Bite', description: 'Heal 50% of damage dealt', type: 'lifesteal', value: 0.5 },
+    { name: 'Vampire Bite', description: 'Heal from your damage dealt', type: 'lifesteal', value: 1 },
     { name: 'Stone Skin', description: 'Reduce damage taken by 8', type: 'defense', value: 8 },
     { name: 'Speed Boost', description: 'Dodge chance +20%', type: 'dodge', value: 20 },
     { name: 'Berserk', description: '+10 strength for 2 rounds', type: 'berserk', value: 10 },
